@@ -1,13 +1,3 @@
-export enum romanNumbers {
-    'I',
-    'V',
-    'X',
-    'L',
-    'C',
-    'D',
-    'M'
-}
-
 function romanToInt (str: string): number {
     const map = new Map();
     map.set('I', 1);
