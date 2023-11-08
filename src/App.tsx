@@ -60,6 +60,7 @@ function App() {
       <header className="App-header">
         <div className="conversion-panel">
           <div className="input-panel">
+            <h1 className="title">Conversion en chiffres romains</h1>
             <input
               type="number"
               placeholder="Entrez un nombre"
@@ -69,6 +70,7 @@ function App() {
             {runtimeError && <div className="error-message">{runtimeError}</div>}
           </div>
           <div className="input-panel">
+          <h1 className="title">Conversion en chiffres romains</h1>
             <input
               type="text"
               placeholder="Entrez un chiffre romain"
