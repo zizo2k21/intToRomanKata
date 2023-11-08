@@ -22,7 +22,7 @@ function romanToInt (str: string): number {
     for (let i = n - 2; i >= 0; i--) {
         map.get(str[i]) >= map.get(str[i + 1]) ? res += map.get(str[i]) : res -= map.get(str[i]);
     }
-    if(isNaN(res)) throw new Error('Must be a roman number')
+    if(isNaN(res) || res > 3999) throw new Error('Must be a roman number or inferior to 3999')
     return res;
 };
 export default romanToInt

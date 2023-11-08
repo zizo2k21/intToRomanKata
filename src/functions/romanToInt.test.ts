@@ -3,7 +3,7 @@ import * as matchers from "jest-extended";
 import romanToInt from "./romanToInt";
 
 expect.extend(matchers);
-const errorString = "Must be a roman number";
+const errorString = "Must be a roman number or inferior to 3999";
 
 test("Success - romanToInt", () => {
   expect(romanToInt("XIV")).toBe(14);
