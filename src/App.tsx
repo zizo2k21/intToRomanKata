@@ -30,7 +30,7 @@ function App() {
       if (typeof error === 'string') {
         setRuntimeError(error);
       } else {
-        setRuntimeError('Une erreur est survenue.');
+        setRuntimeError('Number must be positive or integer or below 3999');
       }
     }
   };
@@ -70,7 +70,7 @@ function App() {
             {runtimeError && <div className="error-message">{runtimeError}</div>}
           </div>
           <div className="input-panel">
-          <h1 className="title">Conversion en chiffres romains</h1>
+          <h1 className="title">Conversion en nombre arabe</h1>
             <input
               type="text"
               placeholder="Entrez un chiffre romain"
