@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+# Integer to roman
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Cette algorithme vise à transformer un nombre donné en chiffre romain.
 
-## Available Scripts
+## Lancer le projet
 
-In the project directory, you can run:
+`npm i ` <br>
+et les test : `npx jest`
 
-### `npm start`
+## Description cycle de vie
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+L'algorithme que nous avons utilisé est ne a une complexité de O(log(n)). En effet, il utilise la technique des deux pointeurs qui permettent à une boucle de se terminer plus rapidement. L'idée étant d'économiser temps et mémoire.
+Afin de ne pas avoir à gérer la soustractions liée au système romain, l'ensemble des possibilités sont intégrées (on pense à IX, IV, CD...).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### cycle de vie de l'algorithme
 
-### `npm test`
+#### organisation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pour faire cette algorithme nous nous sommes inspirés d'un algorithme que j'avais déjà écrit sur leetcode il y a un an.
+En terme de déploiement et qui fait quoi :
+Aziz s'est occupé de la partie web, et moi (Grégoire) me suis occupé de mettre en places les tests, l'algorithme et la gestion d'erreur.
 
-### `npm run build`
+#### test
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Bonus : test de vitesse et de mémoire
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Vous pouvez voir la vitesse de l'algorithme et la mémoire utilisée [ici](https://leetcode.com/problems/integer-to-roman/submissions/1094290886/)

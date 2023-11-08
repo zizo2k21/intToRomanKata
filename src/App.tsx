@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import intToRoman from './functions/intToRoman'; // Assurez-vous d'importer la fonction
+import intToRoman from './functions/intToRoman'; 
 
 function App() {
-  const [number, setNumber] = useState<number | null>(null); // État pour stocker le nombre
-  const [romanNumeral, setRomanNumeral] = useState<string>(''); // État pour stocker le résultat
+  const [number, setNumber] = useState<number | null>(null); 
+  const [romanNumeral, setRomanNumeral] = useState<string>(''); 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = parseInt(event.target.value, 10);
@@ -13,7 +13,7 @@ function App() {
     if (!isNaN(inputNumber)) {
       setRomanNumeral(intToRoman(inputNumber));
     } else {
-      setRomanNumeral(''); // Réinitialise le résultat si l'entrée n'est pas un nombre valide
+      setRomanNumeral(''); 
     }
   };
 

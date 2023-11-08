@@ -21,3 +21,6 @@ test("Fail - intToRoman negative number", () => {
 test("Fail - intToRoman negative number", () => {
   expect(() => intToRoman(1.5)).toThrow(errorString);
 });
+test("Fail - intToRoman negative number", () => {
+  expect(() => intToRoman(4000)).toThrow(errorString);
+});
