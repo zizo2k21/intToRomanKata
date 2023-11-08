@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
 import intToRoman from './functions/intToRoman';
+import romanToInt from './functions/romanToInt';
 
 function App() {
   const [number, setNumber] = useState<number | null>(null);
   const [romanNumeral, setRomanNumeral] = useState<string>('');
-  const [runtimeError, setRuntimeError] = useState<string>(''); // Annotation de type ajoutée pour 'runtimeError'
+  const [romanNumber, setRomanNumber] = useState<string>('');
+  const [runtimeError, setRuntimeError] = useState<string>('');
+  const [runtimeRomanError, setRuntimeRomanError] = useState<string>('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = parseInt(event.target.value, 10);
@@ -14,16 +17,39 @@ function App() {
     try {
       if (!isNaN(inputNumber)) {
         setRomanNumeral(intToRoman(inputNumber));
-        setRuntimeError(''); // Réinitialise les erreurs de runtime en cas de succès
+        setRomanNumber('');
+        setRuntimeError('');
       } else {
         setRomanNumeral('');
-        setRuntimeError(''); // Réinitialise les erreurs de runtime en cas de saisie incorrecte
+        setRomanNumber('');
+        setRuntimeError('Number must be positive or integer or below 3999');
       }
     } catch (error) {
-      if (typeof error === 'string') { // Vérifie que 'error' est bien une chaîne de caractères
+      if (typeof error === 'string') {
         setRuntimeError(error);
       } else {
-        setRuntimeError('Number must be positive or integer or below 3999'); // Gestion par défaut si 'error' n'est pas une chaîne
+        setRuntimeError('Une erreur est survenue.');
+      }
+    }
+  };
+
+  const handleRomanInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputRomanNumber = event.target.value;
+    setRomanNumber(inputRomanNumber);
+
+    try {
+      const result = romanToInt(inputRomanNumber);
+      setRomanNumber(inputRomanNumber);
+      setRomanNumeral('');
+      setRuntimeRomanError('');
+      if (!isNaN(result)) {
+        setNumber(result);
+      }
+    } catch (error) {
+      if (typeof error === 'string') {
+        setRuntimeRomanError(error);
+      } else {
+        setRuntimeRomanError('Une erreur est survenue.');
       }
     }
   };
@@ -31,13 +57,26 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <input
-          type="number"
-          placeholder="Entrez un nombre"
-          onChange={handleInputChange}
-        />
-        {!runtimeError &&<p>Résultat en chiffres romains : {romanNumeral}</p>}
-        {runtimeError && <div className="error-message">{runtimeError}</div>}
+        <div className="conversion-panel">
+          <div className="input-panel">
+            <input
+              type="number"
+              placeholder="Entrez un nombre"
+              onChange={handleInputChange}
+            />
+            {!runtimeError && <p>Résultat en chiffres romains : {romanNumeral}</p>}
+            {runtimeError && <div className="error-message">{runtimeError}</div>}
+          </div>
+          <div className="input-panel">
+            <input
+              type="text"
+              placeholder="Entrez un chiffre romain"
+              onChange={handleRomanInputChange}
+            />
+            {!runtimeRomanError && <p>Résultat en nombre : {number}</p>}
+            {runtimeRomanError && <div className="error-message">{runtimeRomanError}</div>}
+          </div>
+        </div>
       </header>
     </div>
   );
