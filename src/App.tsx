@@ -9,6 +9,8 @@ function App() {
   const [romanNumber, setRomanNumber] = useState<string>('');
   const [runtimeError, setRuntimeError] = useState<string>('');
   const [runtimeRomanError, setRuntimeRomanError] = useState<string>('');
+  const [resultRomanNumber, setResultRomanNumber] = useState<number | null>(null);
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = parseInt(event.target.value, 10);
@@ -40,10 +42,9 @@ function App() {
     try {
       const result = romanToInt(inputRomanNumber);
       setRomanNumber(inputRomanNumber);
-      setRomanNumeral('');
       setRuntimeRomanError('');
       if (!isNaN(result)) {
-        setNumber(result);
+        setResultRomanNumber(result);
       }
     } catch (error) {
       if (typeof error === 'string') {
@@ -73,7 +74,7 @@ function App() {
               placeholder="Entrez un chiffre romain"
               onChange={handleRomanInputChange}
             />
-            {!runtimeRomanError && <p>Résultat en nombre : {number}</p>}
+            {!runtimeRomanError && <p>Résultat en nombre : {resultRomanNumber}</p>}
             {runtimeRomanError && <div className="error-message">{runtimeRomanError}</div>}
           </div>
         </div>
