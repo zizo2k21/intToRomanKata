@@ -44,12 +44,15 @@ Nous avons couverts les cas suivants et avons eu ces réponses:
 5) Un echec qui teste des nombres à virgule et reçoit bien une erreur.
 6) Un echec qui teste un nombre au dela de 3999 et reçoit bien une erreur.
 #### couvertures des tests
-dist/services          |   96.87 |     92.3 |     100 |   96.77 |                   
-  intToRoman.service.js |   92.85 |    85.71 |     100 |   92.85 | 6                 
-  romanToInt.service.js |     100 |      100 |     100 |     100 |                   
- services               |     100 |      100 |     100 |     100 |                   
-  intToRoman.service.ts |     100 |      100 |     100 |     100 |                   
-  romanToInt.service.ts |     100 |      100 |     100 |     100 |                   
+| File                   | Statements | Branches | Functions | Lines |
+|------------------------|------------|----------|-----------|-------|
+| dist/services          | 96.87      | 92.3     | 100       | 96.77 |
+| intToRoman.service.js  | 92.85      | 85.71    | 100       | 92.85 |
+| romanToInt.service.js  | 100        | 100      | 100       | 100   |
+| services               | 100        | 100      | 100       | 100   |
+| intToRoman.service.ts  | 100        | 100      | 100       | 100   |
+| romanToInt.service.ts  | 100        | 100      | 100       | 100   |
+                 
 
 ## Bonus : test de vitesse et de mémoire
 
