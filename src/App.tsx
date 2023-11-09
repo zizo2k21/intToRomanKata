@@ -24,7 +24,7 @@ function App() {
       try {
         const response = await axios.post('https://api-romannumber.onrender.com/romanToInt', { str: inputRomanNumber });
         const result = response.data;
-        value = result.int;
+        value = result;
         setRuntimeRomanError('');
         setResultRomanNumber(value);
         localStorage.setItem(inputRomanNumber, value.toString());
