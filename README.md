@@ -53,6 +53,28 @@ Nous avons couverts les cas suivants et avons eu ces réponses:
 | intToRoman.service.ts  | 100        | 100      | 100       | 100   |
 | romanToInt.service.ts  | 100        | 100      | 100       | 100   |
                  
+## Retrospective 📚
+### Comment a-t-on traité l’exercice de mise en situation
+Il y a eu tout d'abord une étape d'analyse et choix de l'algorithme.
+Nous avons ensuite mis en place un Kanban sur Trello afin de pouvoir mieux gérer les tâches à réaliser. Ce qui nous a permis de ne pas nous perdre et de pouvoir tout faire en temps et en heure.
+Lorsque de nouvelles fonctionnalités ont été demandées nous nous sommes répartis le travail de façon à ce que nous puissions travailler tous les deux en même temps. Un bon exemple serait le fait que l'un s'occupait du fonctionnel / logique et l'autre du rendu en front.
+##### Fiabilité
+Afin d'avoir une plus grande fonctionnalité possible, comme montré ci-dessus nous avons essayé d'avoir la plus grande couverture possible par les tests afin que le produit soit le plus fiable possible.
+#### Git & Déploiement
+En termes de déploiement et de git nous avons décidé de suivre une architecture front / API. Chacun des dépôts est déployé sur des hébergeurs différents et non pas en mono repo. Nous avons aussi utilisé des github pipelines afin d'être certains que les tests passent à chaque commit pour la partie API.
+### Conclusion
+Point d'amélioration : 
+- Nous aurions pu plus nous appliquer sur l'UI/UX.
+- Avec plus de temps nous aurions pu faire plus de cycles itératifs.
+- Nous aurions peut-être aussi pu nous faire des daily le matin à l'arrivée au moins pour clarifier ce que nous avions à faire.
+
+Points positifs:
+- Le développement s'est plutôt bien passé
+- Nous avons coopéré efficacement
+- Nous avons bien géré la charge
+- Nous avons bien respecté nos sprints.
+- L'expérience était enrichissante
+
 
 ## Bonus : test de vitesse et de mémoire
 
