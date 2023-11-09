@@ -1,83 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import intToRoman from './functions/intToRoman';
-import romanToInt from './functions/romanToInt';
+import axios from 'axios';
 
 function App() {
-  const [number, setNumber] = useState<number | null>(null);
-  const [romanNumeral, setRomanNumeral] = useState<string>('');
-  const [romanNumber, setRomanNumber] = useState<string>('');
-  const [runtimeError, setRuntimeError] = useState<string>('');
+  const [inputRomanNumber, setInputRomanNumber] = useState<string>('');
   const [runtimeRomanError, setRuntimeRomanError] = useState<string>('');
   const [resultRomanNumber, setResultRomanNumber] = useState<number | null>(null);
-
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputNumber = parseInt(event.target.value, 10);
-    setNumber(inputNumber);
-
-    try {
-      if (!isNaN(inputNumber)) {
-        setRomanNumeral(intToRoman(inputNumber));
-        setRomanNumber('');
-        setRuntimeError('');
-      } else {
-        setRomanNumeral('');
-        setRomanNumber('');
-        setRuntimeError('Number must be positive or integer or below 3999');
-      }
-    } catch (error) {
-      if (typeof error === 'string') {
-        setRuntimeError(error);
-      } else {
-        setRuntimeError('Number must be positive or integer or below 3999');
-      }
-    }
-  };
+  const [localStorageData, setLocalStorageData] = useState<{ key: string; value: string }[]>([]);
 
   const handleRomanInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputRomanNumber = event.target.value;
-    setRomanNumber(inputRomanNumber);
+    setInputRomanNumber(event.target.value);
+  };
 
-    try {
-      const result = romanToInt(inputRomanNumber);
-      setRomanNumber(inputRomanNumber);
-      setRuntimeRomanError('');
-      if (!isNaN(result)) {
-        setResultRomanNumber(result);
-      }
-    } catch (error) {
-      if (typeof error === 'string') {
-        setRuntimeRomanError(error);
-      } else {
-        setRuntimeRomanError('Une erreur est survenue.');
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    let value : any;
+  
+    if (localStorage.getItem(inputRomanNumber)) {
+      const stringValue = localStorage.getItem(inputRomanNumber);
+      value = parseInt(stringValue || '0', 10);
+      setResultRomanNumber(value);
+    } else {
+      try {
+        const response = await axios.post('https://api-romannumber.onrender.com/romanToInt', { str: inputRomanNumber });
+        const result = response.data;
+        value = result.int;
+        setRuntimeRomanError('');
+        setResultRomanNumber(value);
+        localStorage.setItem(inputRomanNumber, value.toString());
+  
+        // Mettez à jour l'état localStorageData avec la nouvelle entrée
+        setLocalStorageData((prevData) => [...prevData, { key: inputRomanNumber, value: value.toString() }]);
+      } catch (error) {
+        if (typeof error === 'string') {
+          setRuntimeRomanError(error);
+        } else {
+          setRuntimeRomanError('Must be a roman number or inferior to 3999');
+        }
       }
     }
   };
+
+  useEffect(() => {
+    // Charger les données du localStorage au chargement de la page
+    const keys = Object.keys(localStorage);
+    const data = keys.map((key) => ({ key, value: localStorage.getItem(key) || '' }));
+    setLocalStorageData(data);
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <div className="conversion-panel">
           <div className="input-panel">
-            <h1 className="title">Conversion en chiffres romains</h1>
-            <input
-              type="number"
-              placeholder="Entrez un nombre"
-              onChange={handleInputChange}
-            />
-            {!runtimeError && <p>Résultat en chiffres romains : {romanNumeral}</p>}
-            {runtimeError && <div className="error-message">{runtimeError}</div>}
-          </div>
-          <div className="input-panel">
-          <h1 className="title">Conversion en nombre arabe</h1>
-            <input
-              type="text"
-              placeholder="Entrez un chiffre romain"
-              onChange={handleRomanInputChange}
-            />
+            <h1 className="title">Conversion en nombre arabe</h1>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Entrez un chiffre romain"
+                value={inputRomanNumber}
+                onChange={handleRomanInputChange}
+              />
+              <button type="submit">Convertir</button>
+            </form>
             {!runtimeRomanError && <p>Résultat en nombre : {resultRomanNumber}</p>}
             {runtimeRomanError && <div className="error-message">{runtimeRomanError}</div>}
+          </div>
+          <div className="localStorage-panel">
+            <h2>Jeu de données</h2>
+            <ul>
+              {localStorageData.map((item) => (
+                <li key={item.key}>
+                  Romain: {item.key}, Arabe: {item.value}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </header>
